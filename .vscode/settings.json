@@ -1,0 +1,29 @@
+{
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    }
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.github": true,
+    "**/.ruff_cache": true,
+    "**/.vscode": true,
+    "**/.venv": true,
+    "**/.gitignore": true,
+    "**/.python-version": true,
+    "**/uv.lock": true,
+    "**/pyproject.toml": false,
+    "**/README.md": false,
+    "**/.pytest_cache": true,
+    "**/__pycache__": true,
+    "**/site": true,
+    "**/dist": true,
+    "LICENSE": true,
+    "**/sbapa.egg-info": true,
+  },
+  "explorer.excludeGitIgnore": false
+}

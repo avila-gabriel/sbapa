@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+*.egg-info/
+
+# Virtual environments
+.venv
+
+# Ignore all contents of extratos/ and planilhas/
+extratos/*
+planilhas/*
+input/*
+last_planilhas/*
+
+# But do not ignore the folders themselves
+!extratos/.keep
+!planilhas/.keep
+!input/.keep
+!last_planilhas/.keep
+
+uv.lock
