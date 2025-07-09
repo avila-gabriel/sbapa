@@ -1,5 +1,5 @@
 """
-trim.py – PDF trimming utilities for SBAPA
+trim.py - PDF trimming utilities for SBAPA
 
 Provides functions to:
   • Get total pages of a PDF

@@ -1,17 +1,16 @@
-#!/usr/bin/env python3
 """
-main.py – Orquestra todo o fluxo SBAPA com refatoração para biblioteca de extração:
+main.py - Orquestra todo o fluxo SBAPA com refatoração para biblioteca de extração:
 
 1. Lê os períodos já processados em planilhas/movimentacoes.csv (se existir)
 2. Para cada PDF bruto em ./extratos/:
    • Verifica que comece com “Fale Conosco”
    • Extrai o período (“janeiro/2025”) da linha “Resumo - mês/ano”
    • Se o período já estiver no CSV:
-       – Remove o PDF de ./extratos/
-       – Pula para o próximo
+       - Remove o PDF de ./extratos/
+       - Pula para o próximo
    • Caso contrário:
-       – Pergunta interativamente faixa de páginas
-       – Gera versão aparada em ./input/
+       - Pergunta interativamente faixa de páginas
+       - Gera versão aparada em ./input/
 3. Se não existir CSV ou houve novos trims ou o usuário solicitar:
    • Faz backup do CSV existente em ./last_planilhas/
    • Executa extração via extract_all_movements() e write_movements_csv()
@@ -135,7 +134,7 @@ def main() -> None:
             continue
 
         total = get_num_pages(pdf)
-        print(f"   → Período: {periodo} | Páginas: 1–{total}")
+        print(f"   → Período: {periodo} | Páginas: 1-{total}")
 
         # Interação para faixa de páginas
         try:

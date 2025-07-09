@@ -24,6 +24,7 @@
     "**/dist": true,
     "LICENSE": true,
     "**/sbapa.egg-info": true,
+    "**/.keep": true,
   },
   "explorer.excludeGitIgnore": false
 }

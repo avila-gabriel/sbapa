@@ -1,5 +1,5 @@
 """
-parse_movimentacoes.py – Biblioteca de extração de transações SBAPA
+parse_movimentacoes.py - Biblioteca de extração de transações SBAPA
 
 Fornece:
   • extract_movements_from_pdf(pdf_path: Path) -> List[Dict]
