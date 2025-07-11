@@ -28,9 +28,10 @@ from pathlib import Path
 import pandas as pd
 import pdfplumber
 from dateutil.relativedelta import relativedelta
+from PyPDF2 import PdfReader, PdfWriter
 
-from parse_movimentacoes import extract_all_movements, write_movements_csv
-from trim import get_num_pages, trim_pdf
+from src.parse_movimentacoes import extract_all_movements, write_movements_csv
+from src.trim import get_num_pages, trim_pdf
 
 # ── Config ────────────────────────────────────────────────────────────────
 EXTRATO_DIR = Path("extratos")
@@ -99,6 +100,32 @@ def list_gaps(sorted_periodos: list[str]) -> list[str]:
     return gaps
 
 
+def cut_first_page_if_needed(pdf_path: Path) -> None:
+    """Remove first page if it doesn't start with 'Fale Conosco'."""
+    # 1) Quick check with pdfplumber
+    with pdfplumber.open(str(pdf_path)) as pdf:
+        first_text = (pdf.pages[0].extract_text() or "").strip()
+        if first_text.startswith(KEY_PHRASE):
+            return  # already good
+
+        if len(pdf.pages) <= 1:
+            print(f"   ⚠️ '{pdf_path.name}' só 1 página—não há o que cortar.")
+            return
+
+    # 2) Actually remove page 1 using PyPDF2
+    reader = PdfReader(str(pdf_path))
+    writer = PdfWriter()
+    # add pages 2..end
+    for page in reader.pages[1:]:
+        writer.add_page(page)
+
+    # overwrite the original PDF
+    with pdf_path.open("wb") as out_f:
+        writer.write(out_f)
+
+    print(f"   ✂️ Cortada a primeira página de '{pdf_path.name}' (sem '{KEY_PHRASE}').")
+
+
 def main() -> None:
     # 1) Preparar pastas
     if not EXTRATO_DIR.is_dir():
@@ -122,6 +149,10 @@ def main() -> None:
     new_count = 0
     for pdf in pdfs:
         print(f"\n▶️  Processando '{pdf.name}'")
+
+        # Step 0: Pre-trim first page if needed
+        cut_first_page_if_needed(pdf)
+
         try:
             periodo = extract_periodo(pdf)
         except ValueError as e:
