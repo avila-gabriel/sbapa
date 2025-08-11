@@ -16,3 +16,5 @@ Coloque todos os arquivos PDF baixados dentro da pasta chamada extratos.
 Não renomeie os arquivos a menos que seja necessário.
 
 Mantenha apenas arquivos .pdf nessa pasta.
+
+`uv run -m main`
